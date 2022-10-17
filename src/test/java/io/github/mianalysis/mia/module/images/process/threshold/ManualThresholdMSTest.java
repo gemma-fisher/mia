@@ -8,6 +8,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.stream.Stream;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -37,17 +38,18 @@ public class ManualThresholdMSTest extends ModuleTest {
     public static Stream<Arguments> dimensionLogicInputProvider() {
         Stream.Builder<Arguments> argumentBuilder = Stream.builder();
         for (Dimension dimension : Dimension.values())
-                for (Logic logic : Logic.values())
-                    for (OutputMode outputMode : OutputMode.values())
-                        for (ImageType imageType : ImageType.values())
-                            argumentBuilder.add(Arguments.of(dimension, logic, outputMode, imageType));
+            for (Logic logic : Logic.values())
+                for (OutputMode outputMode : OutputMode.values())
+                    for (ImageType imageType : ImageType.values())
+                        argumentBuilder.add(Arguments.of(dimension, logic, outputMode, imageType));
 
         return argumentBuilder.build();
 
     }
-    
+
     /**
-     * Parameterized test run with 8-bit bit depth and all dimensions, all threshold algorithms and all logics. 
+     * Parameterized test run with 8-bit bit depth and all dimensions, all threshold
+     * algorithms and all logics.
      * Parameterized test run with 8-bit bit depth and all dimensions, all threshold
      * algorithms and all logics.
      * The reduced testing here is to keep storage requirements down.
@@ -67,9 +69,10 @@ public class ManualThresholdMSTest extends ModuleTest {
      * 
      * @throws UnsupportedEncodingException
      */
-    public static void runTest(Dimension dimension, Logic logic, int threshold, OutputMode outputMode, ImageType imageType)
+    public static void runTest(Dimension dimension, Logic logic, int threshold, OutputMode outputMode,
+            ImageType imageType)
             throws UnsupportedEncodingException {
-                boolean applyToInput = outputMode.equals(OutputMode.APPLY_TO_INPUT);
+        boolean applyToInput = outputMode.equals(OutputMode.APPLY_TO_INPUT);
         // Checks input image and expected images are available. If not found, the test
         // skips
         String inputName = "/msimages/noisygradient/NoisyGradient_" + dimension + "_B8.zip";
